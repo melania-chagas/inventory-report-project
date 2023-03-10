@@ -4,6 +4,7 @@ from datetime import date
 
 
 class SimpleReport:
+    @staticmethod
     def get_oldest_manufacture(dict_list):
         manufacture_list = []
 
@@ -13,6 +14,7 @@ class SimpleReport:
         manufacture_list.sort()
         return manufacture_list[0]
 
+    @staticmethod
     def get_next_due_date(dict_list):
         expiration_date = []
 
@@ -28,6 +30,7 @@ class SimpleReport:
 
         return unexpired_date_list[0]
 
+    @staticmethod
     def get_greater_quantity_of_products(dict_list):
         list_of_companies = []
 
