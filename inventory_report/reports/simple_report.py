@@ -32,7 +32,7 @@ class SimpleReport:
         )
 
 
-with open("inventory_report/data/inventory.json", encoding='utf-8') as json_:
-    data = json.load(json_)
+# with open("inventory_report/data/inventory.json", encoding='utf-8') as json_:
+#     data = json.load(json_)
 
-print(SimpleReport.generate(data))
+# print(SimpleReport.generate(data))
