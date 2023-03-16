@@ -3,6 +3,7 @@ from inventory_report.reports.complete_report import CompleteReport
 import csv
 import os
 import json
+import xmltodict
 
 
 class Inventory:
@@ -33,11 +34,21 @@ class Inventory:
                     products.append(line)
             return cls.generate_report(report_type, products)
         elif extension == '.json':
-            with open(file_path, encoding='utf-8') as json_:
-                products = json.load(json_)
+            with open(file_path, encoding='utf-8') as file:
+                products = json.load(file)
                 return cls.generate_report(report_type, products)
+        elif extension == '.xml':
+            # https://python-guide-pt-br.readthedocs.io/pt_BR/latest/scenarios/xml.html
+            with open(file_path) as file:
+                products = xmltodict.parse(file.read())
+                # products é um objeto que contém a chave 'dataset'
+                # e dentro dela contém a chave 'record', que é onde está a
+                # lista de produtos que preciso
+                return cls.generate_report(
+                    report_type, products['dataset']['record']
+                )
 
-# path = """
-# /home/melania/trybe/projects/sd-022-a-inventory-report/inventory_report/data/
-# inventory.json"""
+
+# path = """/home/melania/trybe/projects/sd-022-a-inventory-report/
+# inventory_report/data/inventory.xml"""
 # print(Inventory.import_data(path, 'completo'))
