@@ -2,6 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import os
+import json
 
 
 class Inventory:
@@ -31,8 +32,12 @@ class Inventory:
                 for line in csv_file:
                     products.append(line)
             return cls.generate_report(report_type, products)
-
+        elif extension == '.json':
+            with open(file_path, encoding='utf-8') as json_:
+                products = json.load(json_)
+                return cls.generate_report(report_type, products)
 
 # path = """
-# /home/melania/trybe/projects/sd-022-a-inventory-report/inventory_report/data/inventory.csv"""
+# /home/melania/trybe/projects/sd-022-a-inventory-report/inventory_report/data/
+# inventory.json"""
 # print(Inventory.import_data(path, 'completo'))
